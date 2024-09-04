@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meal_planner"
+version = "0.0.1"
+authors = [
+    {name="Andrew Martin", email="114.amart@gmail.com"}
+]
+description = "Package to handle the MealPlanner logic"
+readme = "README.md"
