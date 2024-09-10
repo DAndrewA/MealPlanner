@@ -1,32 +1,32 @@
 CREATE TABLE recipes (
     id INTEGER PRIMARY KEY ASC,
-    name TEXT UNIQUE ON CONFLICT ABORT
+    name TEXT UNIQUE ON CONFLICT ABORT,
     time_prep INTEGER NOT NULL,
     time_cook INTEGER NOT NULL
-)
+);
 
 CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY ASC,
     name TEXT UNIQUE ON CONFLICT ABORT
-)
+);
 
 CREATE TABLE tags (
     id INTEGER PRIMARY KEY ASC,
     name TEXT UNIQUE ON CONFLICT ABORT
-)
+);
 
 CREATE TABLE instructions (
     recipe_id INTEGER REFERENCES recipes (id),
     ordering INTEGER NOT NULL,
     content TEXT NOT NULL
-)
+);
 
 CREATE TABLE ingredients_in_recipe (
     recipe_id INTEGER REFERENCES recipes (id),
     ingredient_id INTEGER REFERENCES ingredients (id)
-)
+);
 
 CREATE TABLE tags_for_recipe (
     recipe_id INTEGER REFERENCES recipes (id),
     tag_id INTEGER REFERENCES tags (id)
-)
+);
