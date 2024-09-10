@@ -15,8 +15,10 @@ The tables included will be:
 
  ```SQL
 CREATE TABLE recipes (
-    id NUM PRIMARY KEY ASC,
+    id INTEGER PRIMARY KEY ASC,
     name TEXT UNIQUE ON CONFLICT ABORT
+    time_prep INTEGER NOT NULL,
+    time_cook INTEGER NOT NULL
 )
  ```
 
@@ -24,7 +26,7 @@ CREATE TABLE recipes (
 
  ```SQL
 CREATE TABLE ingredients (
-    id NUM PRIMARY KEY ASC,
+    id INTEGER PRIMARY KEY ASC,
     name TEXT UNIQUE ON CONFLICT ABORT
 )
  ```
@@ -33,7 +35,7 @@ CREATE TABLE ingredients (
 
  ```SQL
 CREATE TABLE tags (
-    id NUM PRIMARY KEY ASC,
+    id INTEGER PRIMARY KEY ASC,
     name TEXT UNIQUE ON CONFLICT ABORT
 )
  ```
@@ -42,8 +44,8 @@ CREATE TABLE tags (
 
  ```SQL
 CREATE TABLE instructions (
-    recipe_id NUM REFERENCES recipes (id),
-    ordering NUM NOT NULL,
+    recipe_id INTEGER REFERENCES recipes (id),
+    ordering INTEGER NOT NULL,
     content TEXT NOT NULL
 )
  ```
@@ -52,8 +54,8 @@ CREATE TABLE instructions (
 
  ```SQL
 CREATE TABLE ingredients_in_recipe (
-    recipe_id NUM REFERENCES recipes (id),
-    ingredient_id NUM REFERENCES ingredients (id)
+    recipe_id INTEGER REFERENCES recipes (id),
+    ingredient_id INTEGER REFERENCES ingredients (id)
 )
  ```
 
@@ -61,7 +63,7 @@ CREATE TABLE ingredients_in_recipe (
 
  ```SQL
 CREATE TABLE tags_for_recipe (
-    recipe_id NUM REFERENCES recipes (id),
-    tag_id NUM REFERENCES tags (id)
+    recipe_id INTEGER REFERENCES recipes (id),
+    tag_id INTEGER REFERENCES tags (id)
 )
  ```
