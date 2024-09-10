@@ -11,14 +11,17 @@ My plan is to create 2 versions of the application, one in Python (in which I ha
 
 ## Aims
 
-+ create a CL app with robust input error handling
-+ Store, retrieve data using a sqlite database
-+ Have 4 modes of functionality for the "binary"
-    1. Write a new recipe to the database
-    2. List recipes in the database
-    3. Produce a list of meals for the week, with a provided shopping list
-    4. If no prior option is specified when calling the binary, load an interface that allows for all of the above options (extension)
+ - [ ] Have robust error handling throughout the program for user input, file handling, etc.
+ - [ ] Create a local SQLite database to store information about recipes.
+ - [ ] Have an insterface to make recipe entries into the database, including a title, ingredients and steps required.
+ - [ ] Have an interface for listing and reading recipes from the SQLite database. 
+ - [ ] Have an interface for creating a list of meals for a week.
+ - [ ] Have each seperate function be available from the command line, or through a TUI interface.
+ - [ ] In the meal planning, implement features to customise what meals are used in certain slots (i.e. vegetarian meals, quick meals; through a tagging system)
+ - [ ] In the recipe listing, implement a basic fuzzy matching algorithm to allow users to better search for specific recipes, by title, ingredients, tags.
 
 ## Python
 
 The first part coded will be in Python, to hash out the idea and gain familiarity with the sqlite database handling.
+
+
