@@ -18,7 +18,7 @@ type Cursor = sql.Cursor
 
 def get_all_names_from_table(cur: Cursor, table: str) -> list[str]:
     '''Function that extracts all of the "name" entries in the provided table, and returns them as a list.'''
-    res = cur.execute("SELECT name FROM :table", {'table':table})
+    res = cur.execute(f"SELECT name FROM {table}") # this is explicitly suggested against, but table names cannot be passed in as ? or :arg syntax
     names = res.fetchall()
     names = [tup[0] for tup in names]
     return names
@@ -45,18 +45,18 @@ def extract_recipe(cur: Cursor, recipe_name: str):
         raise ValueError(f"Should only be 1 recipe with name {recipe_name}, but received {len(recipe_ids)} ids: {recipe_ids}")
 
     recipe_id = recipe_ids[0][0]
-    instructions = [
+    instructions = {
         ordering: instruction
         for (ordering, instruction) in cur.execute("""
             SELECT ordering, content FROM instructions
             INNER JOIN recipes ON instructions.recipe_id=:recipe_id
             """, {'recipe_id':recipe_id}
         ).fetchall()
-    ]
+    }
     ingredients = [
         ing_tup[0] for ing_tup in cur.execute("""
         SELECT ingredients.name FROM ingredients_in_recipe
-        INNER JOIN ingredients ON ingredient.id=ingredients_in_recipe.ingredient_id
+        INNER JOIN ingredients ON ingredients.id=ingredients_in_recipe.ingredient_id
         WHERE ingredients_in_recipe.recipe_id=:recipe_id
         """, {'recipe_id': recipe_id}
         ).fetchall()
